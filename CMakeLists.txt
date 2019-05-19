@@ -1,15 +1,28 @@
 cmake_minimum_required (VERSION 3.10)
 project (cursordriver)
 
-#set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_LIST_DIR}/cmake)
-
 add_library(easybmp
-    src/EasyBmp.cpp
+    src/EasyBMP.cpp
+)
+
+add_executable(sample
+    sample/EasyBMPsample.cpp
 )
 
 set_target_properties(easybmp PROPERTIES ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/lib)
+set_target_properties(sample PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_LIST_DIR}/bin)
+
+target_include_directories(sample
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/src
+)
+target_link_libraries(sample
+    PRIVATE
+        ${CMAKE_CURRENT_LIST_DIR}/lib/easybmp.lib
+)
 
 set_property(TARGET easybmp PROPERTY CXX_STANDARD 17)
+set_property(TARGET sample PROPERTY CXX_STANDARD 17)
 
 if(MSVC)
     # Force MSVC standards conformance mode to detect non-portable code
