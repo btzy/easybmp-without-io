@@ -21,6 +21,18 @@ target_link_libraries(sample
         ${CMAKE_CURRENT_LIST_DIR}/lib/easybmp.lib
 )
 
+add_custom_command(
+    TARGET sample POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_CURRENT_LIST_DIR}/sample/EasyBMPbackground.bmp
+        ${CMAKE_CURRENT_LIST_DIR}/bin/EasyBMPbackground.bmp)
+
+add_custom_command(
+    TARGET sample POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_CURRENT_LIST_DIR}/sample/EasyBMPtext.bmp
+        ${CMAKE_CURRENT_LIST_DIR}/bin/EasyBMPtext.bmp)
+
 set_property(TARGET easybmp PROPERTY CXX_STANDARD 17)
 set_property(TARGET sample PROPERTY CXX_STANDARD 17)
 
